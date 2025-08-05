@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { socket } from "./socket";
 import "./components/ChatWindow.css";
 import MessageBubble from "./components/MessageBubble";
+import { socket, userId } from "./socket";
+
 
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
-  const sendMessage = () => {
-    if (input.trim()) {
-      socket.emit("chat message", input);
-      setInput("");
-    }
-  };
-
-  useEffect(() => {
-    socket.on("chat message", (msg) => {
-      setMessages((prev) => [...prev, msg]);
+ const sendMessage = () => {
+  if (input.trim()) {
+    socket.emit("chat message", {
+      text: input,
+      senderId: userId,
     });
+    setInput("");
+  }
+};
 
-    return () => socket.off("chat message");
-  }, []);
+useEffect(() => {
+  socket.on("chat message", (msg) => {
+    setMessages((prev) => [...prev, msg]);
+  });
+
+  return () => socket.off("chat message");
+}, []);
+
 
   return (
     <div>

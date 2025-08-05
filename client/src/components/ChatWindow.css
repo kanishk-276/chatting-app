@@ -85,19 +85,28 @@
   stroke: white;
 }
 
-.message-bubble {
-  min-height: 30px;
-  background-color: #1864c4;
-  padding: 10px 15px;
-  border-radius: 20px 20px 0px 20px;
-  margin-top: 10px;
+.left-bubble {
+  text-align: left;
+  background-color: #eeeeee;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 10px;
   max-width: 60%;
-  width: fit-content;
-  min-width: 40%;
-  color: white;
-  margin-left: auto;
-  margin-right: 20px;
+  align-self: flex-start;
+  color: black;
 }
+
+.right-bubble {
+  text-align: right;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 10px;
+  max-width: 60%;
+  align-self: flex-end;
+}
+
 
 .Header{
   width: 100%;

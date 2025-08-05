@@ -4,6 +4,7 @@ const http = require("http");
 const cors = require("cors");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth");
+const Message = require("./models/Message");
 const messageRoutes = require("./routes/message");
 
 const app = express();
@@ -35,15 +36,24 @@ app.use("/api/messages", messageRoutes);
 io.on("connection", (socket) => {
   console.log("New client connected:", socket.id);
 
-  socket.on("chat message", (msg) => {
-    console.log("💬 Message received:", msg);
-    io.emit("chat message", msg);
+  socket.on("chat message", async (data) => {
+    const { text, senderId } = data;
+    console.log("💬 Message received:", data);
+
+    try {
+      const newMessage = new Message({ text, senderId });
+      await newMessage.save();
+      io.emit("chat message", newMessage);  // emit full saved message
+    } catch (err) {
+      console.error("Error saving message:", err);
+    }
   });
 
   socket.on("disconnect", () => {
     console.log("Client disconnected:", socket.id);
   });
 });
+
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
