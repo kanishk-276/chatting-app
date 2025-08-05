@@ -1,16 +1,15 @@
 import React from "react";
-import Chat from "./Chat";
-import MessageWindow from "./components/MessageWindow";
 import "./components/ChatWindow.css";
-import MessageBubble from "./components/MessageBubble";
+import MessageWindow from "./components/MessageWindow";
+import Chat from "./Chat";
+import "./components/ChatWindow.css";
 
 function App() {
   return (
     <div className="App">
-      <MessageWindow>
+        <MessageWindow>
          <Chat />
       </MessageWindow>
-    
     </div>
   );
 }
