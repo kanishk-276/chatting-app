@@ -1,13 +1,14 @@
+// socket.js
+
 import { io } from "socket.io-client";
 
-export const socket = io("http://localhost:5000");
+// Generate and persist a random user ID
+let storedUserId = localStorage.getItem("userId");
 
-
-const storedUserId = localStorage.getItem("userId");
 if (!storedUserId) {
-  const newId = crypto.randomUUID();
-  localStorage.setItem("userId", newId);
+  storedUserId = crypto.randomUUID();  // ensures each tab gets a unique userId
+  localStorage.setItem("userId", storedUserId);
 }
 
-export const userId = localStorage.getItem("userId");
-
+export const userId = storedUserId;
+export const socket = io("http://localhost:5000");

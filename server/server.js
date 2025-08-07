@@ -54,6 +54,15 @@ io.on("connection", (socket) => {
   });
 });
 
+app.get("/api/messages", async (req, res) => {
+  try {
+    const messages = await Message.find().sort({ timestamp: 1 }); // Oldest first
+    res.json(messages);
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    res.status(500).json({ error: "Failed to fetch messages" });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
