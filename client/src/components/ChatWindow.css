@@ -111,6 +111,7 @@
     font-weight: 500;
   font-family: "Poppins", sans-serif;
   list-style-type: none;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .right-bubble {
   position: relative; /* Required for absolute child */
@@ -131,6 +132,7 @@
   font-weight: 500;
   font-family: "Poppins", sans-serif;
   list-style-type: none;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 /* Tick icon styling */
